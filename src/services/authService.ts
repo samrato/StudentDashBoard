@@ -72,4 +72,7 @@ export const getCurrentUser = (): { name: string; regNumber: string } | null => 
 // Logout user
 export const logoutUser = (): void => {
   localStorage.removeItem('currentUser');
-};
+}
+
+
+//serditfgyuhi[joerctopybiun'oim'jj]
