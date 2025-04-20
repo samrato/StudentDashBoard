@@ -1,3 +1,5 @@
+// pages/Login.tsx
+
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
@@ -58,13 +60,16 @@ const Login: React.FC = () => {
       if (user) {
         toast.success('Login successful!');
         navigate('/dashboard');
+      } else {
+        toast.error('Invalid registration number or password');
+        setErrors({
+          regNumber: 'Invalid registration number or password',
+          password: 'Invalid registration number or password'
+        });
       }
     } catch (error) {
-      toast.error('Invalid registration number or password');
-      setErrors({
-        regNumber: 'Invalid registration number or password',
-        password: 'Invalid registration number or password'
-      });
+      console.error('Unexpected login error:', error);
+      toast.error('Something went wrong. Please try again.');
     } finally {
       setIsLoading(false);
     }
@@ -124,14 +129,12 @@ const Login: React.FC = () => {
             </button>
           </form>
 
-          {/* Forgot Password */}
           <div className="mt-4 text-center">
             <Link to="/forgot-password" className="text-sm text-indigo-600 hover:underline">
               Forgot password?
             </Link>
           </div>
 
-          {/* Signup Link */}
           <div className="mt-6 text-center">
             <p className="text-sm text-gray-600">
               Don't have an account?{' '}
