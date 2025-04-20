@@ -11,15 +11,14 @@ const queryClient = new QueryClient();
 
 // Auth Layout
 const AuthLayout = () => (
-  <div className="flex min-h-screen items-center justify-center bg-gray-100">
+  <div className="flex min-h-screen items-center justify-center bg-gradient-to-r from-teal-400 via-blue-500 to-indigo-600">
     <Outlet />
   </div>
 );
 
 // Dashboard Layout
 const DashboardLayout = () => (
-  <div className="flex min-h-screen bg-gray-200">
-    <aside className="w-64 bg-white p-4 shadow-md">Sidebar</aside>
+  <div className="flex min-h-screen bg-gradient-to-r from-purple-600 via-blue-700 to-teal-500">
     <main className="flex-1 p-6">
       <Outlet />
     </main>
