@@ -1,4 +1,4 @@
-import React from "react";
+
 
 const units = [
   { time: "08:00 - 09:30", subject: "Mathematics I", venue: "Room A1" },
