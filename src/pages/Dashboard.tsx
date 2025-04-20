@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
+import { Menu } from 'lucide-react';
+
 import { getCurrentUser, logoutUser } from '../services/authService';
 import WaveBackground from '../components/WaveBackground';
 import { useLocalStorage } from '../components/useLocalStorage';
@@ -60,13 +62,14 @@ const Dashboard: React.FC = () => {
         } lg:translate-x-0`}
         aria-label="Dashboard Sidebar"
       >
-        <button
-          onClick={toggleSidebar}
-          className="lg:hidden absolute top-6 right-6 text-2xl p-2 bg-white/70 rounded-md"
-          aria-label="Toggle sidebar"
-        >
-          &#9776;
-        </button>
+       <button
+  onClick={toggleSidebar}
+  className="lg:hidden fixed top-4 left-4 z-50 p-2 rounded-md bg-white/80 text-black shadow-md"
+  aria-label="Toggle Sidebar"
+>
+  <Menu size={28} />
+</button>
+
         <h2 className="text-2xl font-semibold text-gradient mb-8">Dashboard</h2>
         <div className="space-y-6">
           {[
