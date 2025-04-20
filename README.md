@@ -1,54 +1,35 @@
-# React + TypeScript + Vite
+# 🎓 Student Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A responsive and modern student dashboard built with **React**, **TypeScript**, **Tailwind CSS**, and **React Router**, designed to help students manage their academic information like results, timetable, hostel booking, transfer requests, and other applications.
 
-Currently, two official plugins are available:
+---
+### 🌙 Desktop View (Dark Mode)
+![Dashboard Dark Mode](public/DASHBORD.jpg)
+## 🌟 Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- 📅 Timetable view with weekly schedule
+- 📊 Academic results display
+- 🏠 Hostel booking form
+- 🔄 Transfer request form
+- 📝 Application submission
+- 📱 Mobile-friendly responsive design
+- 🌗 Dark and light theme switch
+- 📁 Sidebar drawer toggle on mobile
+- 🔔 Toast notifications using Sonner
+- ♿ Accessibility friendly
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 🚀 Technologies Used
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+- React + TypeScript
+- Tailwind CSS
+- React Router DOM
+- Sonner (toast notifications)
+- Vite (build tool)
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 📁 Project Structure
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+src/ ├── components/ # Reusable components (e.g., WaveBackground, Sidebar) ├── pages/ # Individual dashboard sections (Results, Timetable, etc.) ├── services/ # Auth services and utility functions ├── App.tsx # Main app component with routes └── main.ts
