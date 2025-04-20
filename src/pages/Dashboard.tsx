@@ -3,11 +3,14 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
 import { getCurrentUser, logoutUser } from '../services/authService';
 import WaveBackground from '../components/WaveBackground';
+import { useLocalStorage } from '../components/useLocalStorage';
 
 const Dashboard: React.FC = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState<{ name: string; email: string; regNumber: string } | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [theme, setTheme] = useLocalStorage('theme', 'light'); // Dark/Light mode persistence
 
   useEffect(() => {
     // Check if user is logged in
@@ -28,6 +31,16 @@ const Dashboard: React.FC = () => {
     navigate('/login');
   };
 
+  const toggleSidebar = () => {
+    setSidebarOpen(!sidebarOpen);
+  };
+
+  const toggleTheme = () => {
+    const newTheme = theme === 'light' ? 'dark' : 'light';
+    setTheme(newTheme);
+    document.documentElement.classList.toggle('dark', newTheme === 'dark');
+  };
+
   if (isLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -37,11 +50,23 @@ const Dashboard: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-r from-purple-600 via-blue-700 to-teal-500 flex">
+    <div className={`min-h-screen flex ${theme === 'dark' ? 'bg-gray-900' : 'bg-gradient-to-r from-purple-600 via-blue-700 to-teal-500'}`}>
       <WaveBackground />
 
       {/* Sidebar */}
-      <aside className="w-64 bg-white/80 backdrop-blur-sm border-r border-border/50 p-6 shadow-lg">
+      <aside
+        className={`w-64 bg-white/80 backdrop-blur-sm border-r border-border/50 p-6 shadow-lg fixed lg:relative transition-transform duration-300 ${
+          sidebarOpen ? 'translate-x-0' : '-translate-x-full'
+        } lg:translate-x-0`}
+        aria-label="Dashboard Sidebar"
+      >
+        <button
+          onClick={toggleSidebar}
+          className="lg:hidden absolute top-6 right-6 text-2xl p-2 bg-white/70 rounded-md"
+          aria-label="Toggle sidebar"
+        >
+          &#9776;
+        </button>
         <h2 className="text-2xl font-semibold text-gradient mb-8">Dashboard</h2>
         <div className="space-y-6">
           {[
@@ -55,6 +80,7 @@ const Dashboard: React.FC = () => {
               key={index}
               onClick={() => navigate(item.link)}
               className="flex items-center space-x-3 w-full p-3 rounded-md hover:bg-indigo-100 transition-colors"
+              aria-label={`Navigate to ${item.title}`}
             >
               <span className="text-xl">{item.icon}</span>
               <span className="font-medium">{item.title}</span>
@@ -69,12 +95,25 @@ const Dashboard: React.FC = () => {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
             <h1 className="text-2xl font-semibold text-gradient">Student Dashboard</h1>
 
-            <button
-              onClick={handleLogout}
-              className="px-4 py-2 text-sm bg-secondary text-foreground rounded-md hover:bg-secondary/80 transition-colors"
-            >
-              Log out
-            </button>
+            <div className="flex items-center space-x-4">
+              {/* Theme Switch */}
+              <button
+                onClick={toggleTheme}
+                className="p-2 rounded-full bg-white/70 dark:bg-gray-800 text-xl"
+                aria-label="Toggle theme"
+              >
+                {theme === 'light' ? '🌙' : '☀️'}
+              </button>
+
+              {/* Log Out Button */}
+              <button
+                onClick={handleLogout}
+                className="px-4 py-2 text-sm bg-secondary text-foreground rounded-md hover:bg-secondary/80 transition-colors"
+                aria-label="Log out"
+              >
+                Log out
+              </button>
+            </div>
           </div>
         </header>
 
@@ -147,6 +186,7 @@ const Dashboard: React.FC = () => {
                 <button
                   key={index}
                   className="bg-white/80 backdrop-blur-sm rounded-lg p-6 shadow-sm border border-border/50 hover:shadow-md hover:bg-white/90 transition-all duration-200 text-left"
+                  aria-label={`Quick Action: ${action.title}`}
                 >
                   <div className="text-2xl mb-2">{action.icon}</div>
                   <h3 className="font-medium">{action.title}</h3>
