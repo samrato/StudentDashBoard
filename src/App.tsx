@@ -6,6 +6,15 @@ import Signup from "./pages/Signup";
 import Dashboard from "./pages/Dashboard";
 import NotFound from "./pages/NotFound";
 
+
+import TimetableForm from "./pages/TimetableForm";
+import Results from "./pages/Results";
+
+// import HostelBookingForm from "./pages/HostelBookingForm";
+// import TransferForm from "./pages/TransferForm";
+// import ApplicationForm from "./pages/ApplicationForm";
+
+
 // Initialize Query Client
 const queryClient = new QueryClient();
 
@@ -38,8 +47,17 @@ const App = () => (
 
         {/* Dashboard Routes */}
         <Route element={<DashboardLayout />}>
-          <Route path="/dashboard" element={<Dashboard />} />
-        </Route>
+  <Route path="/dashboard" element={<Dashboard />} />
+  <Route path="/timetable" element={<TimetableForm />} />
+  <Route path="/results" element={<Results />} />
+
+
+
+  {/* <Route path="/hostel" element={<HostelBookingForm />} />
+  <Route path="/transfer" element={<TransferForm />} />
+  <Route path="/applications" element={<ApplicationForm />} /> */}
+</Route>
+
 
         {/* Default Route Redirect */}
         <Route path="/" element={<Navigate to="/login" replace />} />
